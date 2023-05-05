@@ -6,7 +6,7 @@
     <item
         android:id="@+id/notification"
         android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="Notifications" />
+        android:title="Scheduling" />
     <item android:title="Settings"
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"/>

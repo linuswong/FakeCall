@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings" >
+    android:background="?android:attr/selectableItemBackground"
+    tools:context=".Settings">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_picture"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ImageView.Circle"
@@ -21,13 +24,126 @@
         android:id="@+id/edit_profile_picture_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-32dp"
         android:background="@drawable/bg_circle"
         android:padding="8dp"
         android:src="@drawable/ic_edit_24"
-        app:layout_constraintBottom_toBottomOf="@id/profile_picture"
-        app:layout_constraintEnd_toEndOf="@id/profile_picture"
+        app:layout_constraintStart_toEndOf="@+id/profile_picture"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
         app:tint="@color/white" />
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginTop="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Set Caller Name" />
+
+            <TextView
+                android:id="@+id/textView_settings_callerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Caller Name Not Set"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="____________________________________________"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/button_settings_setCallTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Call Time" />
+
+            <TextView
+                android:id="@+id/textView_settings_callTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time Not Set"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="____________________________________________"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/button_settings_ringtone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="set ringtone" />
+
+            <TextView
+                android:id="@+id/textView_settings_ringtoneText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ringtone not set"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="____________________________________________"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/button_settings_callerVoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Caller Audio" />
+
+            <TextView
+                android:id="@+id/textView_settings_callerAudioText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Caller Audio not set"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="____________________________________________"
+                android:textAlignment="center" />
+
+            <Switch
+                android:id="@+id/switch_settings_isActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Add to List of Callers"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
