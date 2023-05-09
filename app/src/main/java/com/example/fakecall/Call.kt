@@ -12,6 +12,7 @@ data class Call(
     val callTime: Int = 0,
     val isActive: Boolean = false,
     val notifications: NotificationSettings,
+    val area: String= ""
 ) : Parcelable {
 
     @Parcelize

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#393737"
+    tools:context=".CallAcceptScreen">
+
+    <TextView
+        android:id="@+id/textView_callScreen_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_callScreen_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:foregroundTint="#FFFFFF"
+        android:rotation="135"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#F63535"
+        app:fabCustomSize="65dp"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_callScreen_accept"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_callScreen_remindMe"
+        app:maxImageSize="30dp"
+        app:rippleColor="@color/white"
+        app:srcCompat="@android:drawable/stat_sys_phone_call"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_callScreen_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:rotation="-90"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#62D526"
+        app:fabCustomSize="65dp"
+        app:fabSize="auto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton_callScreen_decline"
+        app:layout_constraintTop_toBottomOf="@+id/textView_callScreen_message"
+        app:maxImageSize="35dp"
+        app:srcCompat="@android:drawable/ic_menu_call"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Decline"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_callScreen_decline"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton_callScreen_decline"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_callScreen_decline" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Accept"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_callScreen_accept"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton_callScreen_accept"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_callScreen_accept" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_callScreen_remindMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:backgroundTint="#393737"
+        android:clickable="true"
+        android:elevation="0dp"
+        app:backgroundTint="#FFFFFF"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton_callScreen_message"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_callScreen_number"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm"
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton_callScreen_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:backgroundTint="#393737"
+        android:clickable="true"
+        android:elevation="0dp"
+        app:backgroundTint="#FFFFFF"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton_callScreen_remindMe"
+        app:layout_constraintTop_toBottomOf="@+id/textView_callScreen_number"
+        app:srcCompat="@android:drawable/sym_action_chat"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_remindMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Remind Me"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_callScreen_remindMe"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton_callScreen_remindMe"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_callScreen_remindMe" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Message"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton_callScreen_message"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton_callScreen_message"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_callScreen_message" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_callScreen_person" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="16dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imageedit_2_5625507535" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:background="#473F3F"
+        android:foregroundTint="#ECE6E6"
+        android:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView_callScreen_silent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/imageedit_6_4162257337" />
+
+    <TextView
+        android:id="@+id/textView_callScreen_silent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Silent"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
