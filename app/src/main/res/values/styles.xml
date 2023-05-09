@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ImageView.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="mystyle">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+</resources>

@@ -2,10 +2,11 @@ package com.example.fakecall
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import com.example.fakecall.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class CallActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.notification -> replaceFragment(Profile())
+                R.id.notification -> replaceFragment(ContactsContract.Profile())
                 R.id.settings -> replaceFragment(Settings())
                 else -> super.onOptionsItemSelected(it)
             }
