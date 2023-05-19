@@ -19,12 +19,17 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3335" />
         <entry key="app/src/main/res/drawable/layout_border.xml" value="0.2195" />
         <entry key="app/src/main/res/drawable/profile_picture.xml" value="0.3335" />
+        <entry key="app/src/main/res/layout/activity_call_accept_screen.xml" value="0.3645833333333333" />
+        <entry key="app/src/main/res/layout/activity_call_list.xml" value="0.3645833333333333" />
+        <entry key="app/src/main/res/layout/activity_call_screen.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/fake_call_screen.xml" value="0.17958459979736577" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.213768115942029" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.213768115942029" />
+        <entry key="app/src/main/res/layout/fragment_scheduling.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_call.xml" value="0.19972826086956522" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/xml/preference.xml" value="0.335" />
         <entry key="app/src/main/res/xml/preferences.xml" value="0.5" />

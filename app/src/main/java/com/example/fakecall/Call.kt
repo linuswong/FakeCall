@@ -8,10 +8,10 @@ import java.util.*
 
 @Parcelize
 data class Call(
-    val caller: String = "Linus",
+    var caller: String = "Caller name not set",
     val callTime: Int = 0,
     val isActive: Boolean = false,
-    val notifications: NotificationSettings,
+//    val notifications: NotificationSettings,
     val area: String= ""
 ) : Parcelable {
 
