@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#070707"
     android:backgroundTint="#921E1E1E"
-    android:foregroundTint="#FFFFFF">
+    android:foregroundTint="#FFFFFF"
+    tools:context=".FakeCallScreen">>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_keypad_fakeCallScreen"
@@ -182,7 +183,7 @@
         app:layout_constraintTop_toBottomOf="@+id/floatingActionButton_contacts_fakeCallScreen" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/floatingActionButton_hangUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF0000"

@@ -1,13 +1,10 @@
 package com.example.fakecall
 
 import android.os.Bundle
-import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,8 +27,6 @@ class Home : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        val inflater = TransitionInflater.from(requireContext())
-        exitTransition = inflater.inflateTransition(R.transition.slide_left)
     }
 
     override fun onCreateView(
@@ -40,7 +35,6 @@ class Home : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
-
     }
 
     companion object {
@@ -61,11 +55,5 @@ class Home : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    private fun setFragmentListener(){
-        setFragmentResultListener(AppConstants.REQUEST_KEY){requestKey, bundle ->
-            val result = bundle.getString(AppConstants.BUNDLE_KEY)
-        }
     }
 }

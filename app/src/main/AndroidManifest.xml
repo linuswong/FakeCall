@@ -17,6 +17,9 @@
             android:name=".CallList"
             android:exported="false" />
         <activity
+            android:name = ".FakeCallScreen"
+            android:exported="false" />
+        <activity
             android:name=".CallAcceptScreen"
             android:exported="false" />
         <activity
