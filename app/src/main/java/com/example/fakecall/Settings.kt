@@ -37,6 +37,7 @@ class Settings : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var binding : FragmentSettingsBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())

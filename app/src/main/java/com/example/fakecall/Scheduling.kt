@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.fakecall.databinding.FragmentSchedulingBinding
 import androidx.fragment.app.setFragmentResultListener
+import com.example.fakecall.databinding.MotionLayoutBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private lateinit var binding: FragmentSchedulingBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -24,6 +24,10 @@ class Profile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var _binding: MotionLayoutBinding? = null
+
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +43,21 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = MotionLayoutBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
         binding.fabFragmentSchedulingCallPerson.setOnClickListener{
             binding.guidelineFragmentSchedulingGuideline.setGuidelinePercent(0.6F)
             binding.groupFragmentSchedulingNumbers.visibility
             true
         }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scheduling, container, false)
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

@@ -10,8 +10,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <CustomAttribute
-            motion:attributeName="layout_constraintGuide_percent"
-            motion:customValue="0.6" />
+            motion:attributeName="guideline_FragmentScheduling_guideline"
+            motion:layout_constraintGuide_percent="0.6" />
         </Constraint>
 
         <Constraint
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <CustomAttribute
-            motion:attributeName="layout_constraintGuide_percent"
-            motion:customValue="1.0" />
+            motion:attributeName="guideline_FragmentScheduling_guideline"
+            motion:layout_constraintGuide_percent="1.0" />
         </Constraint>
 
         <Constraint
