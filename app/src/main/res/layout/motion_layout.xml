@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_scheduling_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/motion_layout_scene">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -14,6 +14,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_FragmentScheduling_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_FragmentScheduling_numbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="fab_FragmentScheduling_one,fab_FragmentScheduling_two,fab_FragmentScheduling_three,fab_FragmentScheduling_four,fab_FragmentScheduling_five,fab_FragmentScheduling_six,fab_FragmentScheduling_seven,fab_FragmentScheduling_eight,fab_FragmentScheduling_nine,fab_FragmentScheduling_zero,fab_FragmentScheduling_delete,fab_FragmentScheduling_numberPad" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_FragmentScheduling_CallPerson"
@@ -27,14 +41,20 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_FragmentScheduling_guideline"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_FragmentScheduling_numbers"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_FragmentScheduling_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="fab_FragmentScheduling_one,fab_FragmentScheduling_two,fab_FragmentScheduling_three,fab_FragmentScheduling_four,fab_FragmentScheduling_five,fab_FragmentScheduling_six,fab_FragmentScheduling_seven,fab_FragmentScheduling_eight,fab_FragmentScheduling_nine,fab_FragmentScheduling_zero,fab_FragmentScheduling_delete"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="604dp" />
+        android:clickable="true"
+        app:backgroundTint="#FFFFFF"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_four"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:srcCompat="@drawable/one"
+        app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_FragmentScheduling_two"
@@ -67,59 +87,34 @@
         app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_FragmentScheduling_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#FFFFFF"
-        app:fabCustomSize="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_two"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fab_FragmentScheduling_two"
-        app:srcCompat="@drawable/one"
-        app:tint="@null" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_FragmentScheduling_seven"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#FFFFFF"
-        app:fabCustomSize="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_eight"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fab_FragmentScheduling_eight"
-        app:srcCompat="@drawable/new7"
-        app:tint="@null" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_FragmentScheduling_four"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_seven"
         app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_five"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fab_FragmentScheduling_five"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_one"
         app:srcCompat="@drawable/four"
         app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_FragmentScheduling_delete"
+        android:id="@+id/fab_FragmentScheduling_five"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_nine"
-        app:srcCompat="@drawable/delete"
-        app:tint="@null"
-        tools:layout_editor_absoluteX="297dp" />
+        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_eight"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_six"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_four"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_two"
+        app:srcCompat="@drawable/new5"
+        app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_FragmentScheduling_six"
@@ -134,6 +129,36 @@
         app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_five"
         app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_three"
         app:srcCompat="@drawable/new6"
+        app:tint="@null" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_FragmentScheduling_seven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="#FFFFFF"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_numberPad"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_eight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_four"
+        app:srcCompat="@drawable/new7"
+        app:tint="@null" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_FragmentScheduling_eight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="#FFFFFF"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_zero"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_nine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_seven"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_five"
+        app:srcCompat="@drawable/eight"
         app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -159,46 +184,42 @@
         app:backgroundTint="#FFFFFF"
         app:fabCustomSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_delete"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_numberPad"
         app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_eight"
         app:srcCompat="@drawable/zero"
-        app:tint="@null"
-        tools:layout_editor_absoluteX="181dp" />
+        app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_FragmentScheduling_five"
+        android:id="@+id/fab_FragmentScheduling_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_eight"
-        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_six"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_four"
-        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_two"
-        app:srcCompat="@drawable/new5"
+        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_zero"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_nine"
+        app:srcCompat="@drawable/delete"
         app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_FragmentScheduling_eight"
+        android:id="@+id/fab_FragmentScheduling_numberPad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:fabCustomSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/fab_FragmentScheduling_zero"
-        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_nine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fab_FragmentScheduling_zero"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/fab_FragmentScheduling_seven"
-        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_five"
-        app:srcCompat="@drawable/eight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fab_FragmentScheduling_seven"
+        app:srcCompat="@drawable/ic_baseline_dialpad_24"
         app:tint="@null" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_FragmentScheduling_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

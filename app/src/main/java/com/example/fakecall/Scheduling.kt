@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.fakecall.databinding.FragmentSchedulingBinding
 import androidx.fragment.app.setFragmentResultListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private lateinit var binding: FragmentSchedulingBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -37,6 +39,11 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding.fabFragmentSchedulingCallPerson.setOnClickListener{
+            binding.guidelineFragmentSchedulingGuideline.setGuidelinePercent(0.6F)
+            binding.groupFragmentSchedulingNumbers.visibility
+            true
+        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_scheduling, container, false)
     }
