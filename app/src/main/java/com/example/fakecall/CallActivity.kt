@@ -32,13 +32,12 @@ class CallActivity : AppCompatActivity() {
         replaceFragment(Home())
         Backendless.initApp(this, AppConstants.APP_ID,AppConstants.API_KEY)
         Backendless.UserService.login(
-            "test",
+            "testEmail@gmail.com",
             "123",
             object : AsyncCallback<BackendlessUser?> {
                 override fun handleResponse(user: BackendlessUser?) {
                     // user has been logged in
-                    Log.d(CallActivity.TAG, "handleResponse: ${user?.getProperty("username")}: has logged in")
-                    val userId = user!!.objectId
+                    Log.d(CallActivity.TAG, "handleResponse: ${user?.getProperty("ownerId")}: has logged in")
                 }
 
                 override fun handleFault(fault: BackendlessFault) {

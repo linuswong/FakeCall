@@ -35,15 +35,13 @@ private var callData = Call()
  */
 class Settings : Fragment() {
     // TODO: Rename and change types of parameters
-    private var callerName: String? = null
-    private var param2: String? = null
     private lateinit var binding : FragmentSettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
         exitTransition = inflater.inflateTransition(R.transition.slide_right)
-
+        retrieveAllData()
     }
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
@@ -66,8 +64,9 @@ class Settings : Fragment() {
 //        setFragmentListener()
         saveSettings()
         showEditTextDialog()
-        return binding.root
-    }
+        retrieveAllData()
+
+        return binding.root }
 
 //    override fun onResume() {
 //        setFragmentListener()
@@ -80,6 +79,7 @@ class Settings : Fragment() {
 //        super.onStop()
 //    }
 
+    //popup for filling in caller name
     private fun showEditTextDialog(){
         binding.buttonSettingsSetCallerName.setOnClickListener {
             val builder = AlertDialog.Builder(this.context)
@@ -91,7 +91,7 @@ class Settings : Fragment() {
                 "OK"
             ) { dialog, which -> m_Text = input.text.toString()
                 binding.textViewSettingsCallerName.text = m_Text
-                callerName = m_Text // testing thing
+                callData.caller = m_Text
 
             }
             builder.setNegativeButton(
@@ -103,8 +103,8 @@ class Settings : Fragment() {
     }
 //    private fun setFragmentListener(){
 //        setFragmentResultListener(AppConstants.REQUEST_KEY) { requestKey, bundle ->
-//            // We use a String here, but any type that can be put in a Bundle is supported.
-//            System.out.println("LINUS FROGS WORKED 1/2")
+////            // We use a String here, but any type that can be put in a Bundle is supported.
+////            System.out.println("LINUS FROGS WORKED 1/2")
 //            if(bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY) != null)
 //            {
 //                callData = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)!!
@@ -113,30 +113,36 @@ class Settings : Fragment() {
 //            }
 //        }
 //    }
+    //initializes buttons when data is retrieved
     private fun initializeButtonsAndStuff(){
-        binding.textViewSettingsCallerName.text = callerName
+        binding.textViewSettingsCallerName.text = callData.caller
     }
 
+    //saves the current settings as the default to backendless
     private fun saveSettings(){
-        binding.buttonSettingsSaveSettings.setOnClickListener {
+        binding.buttonSettingsSaveDefault.setOnClickListener {
             callData.caller = binding.textViewSettingsCallerName.text.toString()
-//            setFragmentResult( AppConstants.REQUEST_KEY, bundleOf(AppConstants.BUNDLE_KEY to callData))
-            System.out.println("linus+$callData")
+            updateCall()
         }
     }
-    private fun retrieveAllData(userId: String){
-        val whereClause = "ownerId = '$userId'"
+    //retrieves default call data from backendless
+    private fun retrieveAllData(){
+        val whereClause = "ownerId = '${AppConstants.ownerId}'"
+        val defaultClause = "isDefault = 'true'"
         val queryBuilder = DataQueryBuilder.create()
-        queryBuilder.setWhereClause( whereClause );
+        queryBuilder.addProperties("isDefault")
+        queryBuilder.setWhereClause(whereClause );
         Backendless.Data.of(Call::class.java).find(queryBuilder,object :
             AsyncCallback<List<Call?>?> {
             override fun handleResponse(foundLoan: List<Call?>?) {
                 // all Contact instances have been found
-                Log.d(CallActivity.TAG,"foundLoan: $foundLoan")
+                Log.d(CallActivity.TAG,"foundDefaultCall: $foundLoan")
                 var wong = ArrayList<Call>()
-                if (foundLoan != null) {
+                if (!foundLoan.isNullOrEmpty()) {
                     var callList = foundLoan as List<Call>
                     callList.forEach { Call -> wong.add(Call) }
+                    callData = callList.first()
+                    initializeButtonsAndStuff()
                 }
             }
 

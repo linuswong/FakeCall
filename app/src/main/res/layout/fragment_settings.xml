@@ -8,64 +8,93 @@
     tools:context=".Settings">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profile_picture"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ImageView.Circle"
-        app:srcCompat="@drawable/profile_picture" />
-
-    <ImageView
-        android:id="@+id/edit_profile_picture_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="-32dp"
-        android:layout_marginTop="-32dp"
-        android:background="@drawable/bg_circle"
-        android:padding="8dp"
-        android:src="@drawable/ic_edit_24"
-        app:layout_constraintStart_toEndOf="@+id/profile_picture"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
-        app:tint="@color/white" />
-
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-
-        android:layout_marginTop="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
+
+        <!--        android:layout_width="0dp"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginStart="8dp"-->
+
+        <!--        android:layout_marginTop="64dp"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintHorizontal_bias="0.0"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/profile_picture"-->
+        <!--        app:layout_constraintVertical_bias="0.0">-->
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:gravity="center"-->
+            <!--            android:orientation="vertical">-->
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ImageView.Circle"
+                app:srcCompat="@drawable/profile_picture" />
+
+            <ImageView
+                android:id="@+id/edit_profile_picture_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="-32dp"
+                android:layout_marginTop="-32dp"
+                android:layout_weight="5"
+                android:background="@drawable/bg_circle"
+                android:padding="8dp"
+                android:src="@drawable/ic_edit_24"
+                app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:text="____________________________________________"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/button_settings_setCallerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="10"
                 android:gravity="center"
-                android:text="Set Caller Name" />
+                android:text="Set Caller Name"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView_settings_callerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Caller Name Not Set"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <TextView
@@ -73,19 +102,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="____________________________________________"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/button_settings_setCallTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set Call Time" />
+                android:layout_weight="1"
+                android:text="Set Call Time"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView_settings_callTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Time Not Set"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <TextView
@@ -93,19 +128,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="____________________________________________"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/button_settings_setRingtone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="set ringtone" />
+                android:layout_weight="1"
+                android:text="set ringtone"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView_settings_ringtone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ringtone not set"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <TextView
@@ -113,19 +154,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="____________________________________________"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/button_settings_callerVoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set Caller Audio" />
+                android:layout_weight="1"
+                android:text="Set Caller Audio"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView_settings_callerAudioText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Caller Audio not set"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <TextView
@@ -133,17 +180,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:text="____________________________________________"
+                tools:ignore="HardcodedText"
+                android:layout_weight="1"
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/button_settings_saveSettings"
+                android:id="@+id/button_settings_saveDefault"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:minHeight="48dp"
-                android:text="Add to List of Callers"
+                android:text="Save as default"
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:text="____________________________________________"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </ScrollView>
