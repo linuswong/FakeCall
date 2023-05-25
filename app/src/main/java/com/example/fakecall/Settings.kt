@@ -1,8 +1,11 @@
 package com.example.fakecall
 
 import android.app.AlertDialog
-import android.content.Context
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.text.InputType
 import android.transition.TransitionInflater
 import android.util.Log
@@ -11,15 +14,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import com.backendless.Backendless
 import com.backendless.async.callback.AsyncCallback
 import com.backendless.exceptions.BackendlessFault
 import com.backendless.persistence.DataQueryBuilder
 import com.example.fakecall.databinding.FragmentSettingsBinding
+import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
+import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,7 +67,10 @@ class Settings : Fragment() {
         binding = FragmentSettingsBinding.inflate(inflater,container,false)
 //        setFragmentListener()
         saveSettings()
-        showEditTextDialog()
+        showCallerNameOptions()
+        showCallTimeOptions()
+        showRingToneOptions()
+        showCallerAudioOptions()
         retrieveAllData()
 
         return binding.root }
@@ -79,9 +85,23 @@ class Settings : Fragment() {
 //        Log.d("Frogs","STOPPED + $callerName")
 //        super.onStop()
 //    }
+//    private fun setFragmentListener(){
+//        setFragmentResultListener(AppConstants.REQUEST_KEY) { requestKey, bundle ->
+////            // We use a String here, but any type that can be put in a Bundle is supported.
+////            System.out.println("LINUS FROGS WORKED 1/2")
+//            if(bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY) != null)
+//            {
+//                callData = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)!!
+//                System.out.println("LINUS FROGS 2/2")
+//                initializeButtonsAndStuff()
+//            }
+//        }
+//    }
+
+
 
     //popup for filling in caller name
-    private fun showEditTextDialog(){
+    private fun showCallerNameOptions(){
         binding.buttonSettingsSetCallerName.setOnClickListener {
             val builder = AlertDialog.Builder(this.context)
             builder.setTitle("Set Caller Name")
@@ -102,18 +122,75 @@ class Settings : Fragment() {
             builder.show()
         }
     }
-//    private fun setFragmentListener(){
-//        setFragmentResultListener(AppConstants.REQUEST_KEY) { requestKey, bundle ->
-////            // We use a String here, but any type that can be put in a Bundle is supported.
-////            System.out.println("LINUS FROGS WORKED 1/2")
-//            if(bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY) != null)
-//            {
-//                callData = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)!!
-//                System.out.println("LINUS FROGS 2/2")
-//                initializeButtonsAndStuff()
-//            }
-//        }
-//    }
+
+    private fun showCallTimeOptions(){
+        binding.buttonSettingsSetCallTime.setOnClickListener {
+            val builder = AlertDialog.Builder(this.context)
+            builder.setTitle("Enter a time")
+            val input = EditText(this.context)
+            input.hint = "00000s"
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton(
+                "OK"
+            ) { dialog, which ->
+
+            }
+            builder.setNegativeButton(
+                "Cancel"
+            ) { dialog, which -> dialog.cancel() }
+            builder.show()
+        }
+    }
+    private fun showRingToneOptions(){
+        binding.buttonSettingsSetRingtone.setOnClickListener {
+            val player = MediaPlayer.create(this.context,Settings.System.DEFAULT_RINGTONE_URI)
+            player.start()
+            val settings = UltimateRingtonePicker.Settings(
+                systemRingtonePicker = UltimateRingtonePicker.SystemRingtonePicker(
+                    customSection = UltimateRingtonePicker.SystemRingtonePicker.CustomSection(),
+                    defaultSection = UltimateRingtonePicker.SystemRingtonePicker.DefaultSection(),
+                    ringtoneTypes = listOf(
+                        RingtoneManager.TYPE_RINGTONE,
+                        RingtoneManager.TYPE_NOTIFICATION,
+                        RingtoneManager.TYPE_ALARM
+                    )
+                ),
+                deviceRingtonePicker = UltimateRingtonePicker.DeviceRingtonePicker(
+                    deviceRingtoneTypes = listOf(
+                        UltimateRingtonePicker.RingtoneCategoryType.All,
+                        UltimateRingtonePicker.RingtoneCategoryType.Artist,
+                        UltimateRingtonePicker.RingtoneCategoryType.Album,
+                        UltimateRingtonePicker.RingtoneCategoryType.Folder
+                    )
+                )
+            )
+
+        }
+    }
+    private fun showCallerAudioOptions(){
+        binding.buttonSettingsCallerVoice.setOnClickListener {
+            val colors = arrayOf("red", "green", "blue", "black")
+
+            val builder = AlertDialog.Builder(this.context)
+            builder.setTitle("Pick a color")
+            builder.setItems(colors) { dialog, which ->
+                // the user clicked on colors[which]
+            }
+            val input = EditText(this.context)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            builder.setPositiveButton(
+                "OK"
+            ) { dialog, which ->
+
+            }
+            builder.setNegativeButton(
+                "Cancel"
+            ) { dialog, which -> dialog.cancel() }
+            builder.show()
+        }
+    }
     //initializes buttons when data is retrieved
     private fun initializeButtonsAndStuff(){
         binding.textViewSettingsCallerName.text = callData.caller
@@ -128,10 +205,9 @@ class Settings : Fragment() {
     }
     //retrieves default call data from backendless
     private fun retrieveAllData(){
-        val whereClause = "ownerId = '${AppConstants.ownerId}'"
-        val defaultClause = "isDefault = 'true'"
+        // val whereClause = "ownerId = '${AppConstants.ownerId}'"
+        val whereClause = "isDefault = 'true'"
         val queryBuilder = DataQueryBuilder.create()
-        queryBuilder.addProperties("isDefault")
         queryBuilder.setWhereClause(whereClause );
         Backendless.Data.of(Call::class.java).find(queryBuilder,object :
             AsyncCallback<List<Call?>?> {
@@ -158,14 +234,16 @@ class Settings : Fragment() {
         Backendless.Data.of(Call::class.java).save(callData, object : AsyncCallback<Call> {
             override fun handleResponse(response: Call?) {
                 // Contact instance has been updated
-                Log.d("SAVE LOAN","handle response: $response")
-                Toast.makeText(this@Settings.context, "Loan successfully saved", Toast.LENGTH_SHORT).show()
+                Log.d("SAVE SETTINGS","handle response: $response")
+                Toast.makeText(this@Settings.context, "Settings successfully saved", Toast.LENGTH_SHORT).show()
             }
 
             override fun handleFault(fault: BackendlessFault) {
                 // an error has occurred, the error code can be retrieved with fault.getCode()
-                Log.d("SAVE LOAN","HandleFault : $fault")
+                Log.d("SAVE SETTINGS","HandleFault : $fault")
             }
         })
     }
+
+
 }
