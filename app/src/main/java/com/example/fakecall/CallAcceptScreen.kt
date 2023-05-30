@@ -22,6 +22,9 @@ class CallAcceptScreen : AppCompatActivity() {
             callData = intent.getParcelableExtra<Call>(EXTRA_SCHEDULEDCALL) ?: Call()
         }
 
+        //JOPHNNSAGIJ RIGHTR  HERE DO THE THUING WITH THE RINGTONE
+        binding.textViewCallScreenPerson.text="balls"
+
 
         binding.floatingActionButtonCallScreenAccept.setOnClickListener{
 

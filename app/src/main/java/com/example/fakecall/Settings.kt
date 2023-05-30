@@ -2,6 +2,7 @@ package com.example.fakecall
 
 import android.app.AlertDialog
 import android.app.TimePickerDialog
+import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.os.Bundle
 import android.text.InputType
@@ -29,6 +30,7 @@ private var callData = Call()
 
 class Settings : Fragment() {
     // TODO: Rename and change types of parameters
+    private lateinit var player:MediaPlayer
     private lateinit var binding : FragmentSettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,27 +142,45 @@ class Settings : Fragment() {
         }
     }
     //Linus do this
+    private fun stopPlayer(){
+        if (player.isPlaying){
+            player.stop()
+            player.release()
+        }
+
+    }
     private fun showCallerAudioOptions(){
         binding.buttonSettingsCallerVoice.setOnClickListener {
-            val colors = arrayOf("red", "green", "blue", "black")
+            val callerAudios = arrayOf("Animal Crossing", "Random Dude")
 
             val builder = AlertDialog.Builder(this.context)
-            builder.setTitle("Pick a color")
-            builder.setItems(colors) { dialog, which ->
-                // the user clicked on colors[which]
+
+
+            builder.setTitle("Pick a caller audio")
+            builder.setItems(callerAudios) { dialog, which ->
+                binding.textViewSettingsCallerAudioText.text = callerAudios[which]
+                if(callerAudios[which]=="Animal Crossing"){
+                    player=MediaPlayer.create(it.context,R.raw.animal_crossing)
+                    player.start()
+
+                }
+                binding.textViewSettingsCallerAudioText.text = callerAudios[which]
+                if(callerAudios[which]=="Random Dude"){
+                    player=MediaPlayer.create(it.context,R.raw.random_dude)
+                    player.start()
+                }
+                // the user clicked on callerAudios[which]
             }
             val input = EditText(this.context)
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
-            builder.setPositiveButton(
-                "OK"
-            ) { dialog, which ->
 
-            }
             builder.setNegativeButton(
                 "Cancel"
             ) { dialog, which -> dialog.cancel() }
             builder.show()
+
+
         }
     }
 
@@ -172,6 +192,8 @@ class Settings : Fragment() {
         binding.textViewSettingsCallTime.text = callData.callTimeText
         binding.textViewSettingsRingtone.text = callData.ringtoneText
         binding.textViewSettingsCallerAudioText.text = callData.callerAudioText
+
+
     }
 
     //saves the current settings as the default to backendless
