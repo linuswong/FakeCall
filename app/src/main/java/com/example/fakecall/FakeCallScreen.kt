@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore.Audio.Media
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.example.fakecall.databinding.FakeCallScreenBinding
 
 
@@ -17,16 +18,24 @@ class FakeCallScreen:AppCompatActivity() {
     private lateinit var binding: FakeCallScreenBinding
     private var thingy: Boolean = false
     private var thangy:Boolean =false
+    private var callData = Call()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FakeCallScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(intent.getParcelableExtra<Call>(CallAcceptScreen.EXTRA_SCHEDULEDCALL) == null) {
+            callData = Call()
+        } else {
+            callData = intent.getParcelableExtra<Call>(CallAcceptScreen.EXTRA_SCHEDULEDCALL) ?: Call()
+        }
+
                                                 //call audio chosen by profile
         player = MediaPlayer.create(this, R.raw.animal_crossing)
         player.start()
         player.isLooping = true
-        binding.textView7.text="balls"
+        binding.textView7.text= callData.caller
 
         binding.floatingActionButtonHangUp.setOnClickListener {
             player.isLooping=false

@@ -45,7 +45,8 @@ class Home : Fragment() {
 
     private fun retrieveAllDataScheduled(){
         val queryBuilder = DataQueryBuilder.create()
-        queryBuilder.setSortBy( "callTime DESC", "isDefault = 'False'" )
+        queryBuilder.setWhereClause("defaultSettings = 'False'")
+        queryBuilder.setSortBy( "callTime DESC")
         Backendless.Data.of(Call::class.java).find(queryBuilder,object :
             AsyncCallback<List<Call?>?> {
             override fun handleResponse(foundLoan: List<Call?>?) {
