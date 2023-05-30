@@ -27,9 +27,6 @@
             android:name=".CallAcceptScreen"
             android:exported="false" />
         <activity
-            android:name=".CallScreenActivity"
-            android:exported="false" />
-        <activity
             android:name=".CallActivity"
             android:exported="true" >
             <intent-filter>

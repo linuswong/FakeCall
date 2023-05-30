@@ -8,17 +8,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.backendless.Backendless
 import com.backendless.async.callback.AsyncCallback
 import com.backendless.exceptions.BackendlessFault
 import com.backendless.persistence.DataQueryBuilder
 import com.example.fakecall.databinding.FragmentHomeBinding
-import com.example.fakecall.databinding.FragmentSettingsBinding
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.time.DurationUnit
 
 private lateinit var binding:FragmentHomeBinding
 
@@ -36,17 +32,18 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        //Big Green Button
         binding.floatingActionButtonHomeStartCall.setOnClickListener {
-            val detailIntent= Intent(it.context,CallAcceptScreen::class.java)
-            startActivity(detailIntent)
+            retrieveAllData()
         }
-        retrieveAllData()
+        retrieveAllDataScheduled()
         return binding.root
     }
 
-    private fun retrieveAllData(){
+    private fun retrieveAllDataScheduled(){
         val queryBuilder = DataQueryBuilder.create()
-        queryBuilder.setSortBy( "callTime DESC" )
+        queryBuilder.setSortBy( "callTime DESC", "isDefault = 'False'" )
         Backendless.Data.of(Call::class.java).find(queryBuilder,object :
             AsyncCallback<List<Call?>?> {
             override fun handleResponse(foundLoan: List<Call?>?) {
@@ -86,8 +83,62 @@ class Home : Fragment() {
             // when the time is up
             override fun onFinish() {
                 binding.textViewHomeTimeUntilCall.setText("done!")
-                //no
+                val detailIntent= Intent(this@Home.context,CallAcceptScreen::class.java).apply{
+                putExtra(CallAcceptScreen.EXTRA_SCHEDULEDCALL, callData)
+                }
+                startActivity(detailIntent)
+                deleteFromBackendless(callData)
             }
         }.start()
+    }
+
+    private fun deleteFromBackendless(callData: Call) {
+        Log.d("LoanAdapter", "deleteFromBackendless: Trying to delete ${callData}")
+        // put in the code to delete the item using the callback from Backendless
+        Backendless.Data.of(Call::class.java).remove(callData,
+            object : AsyncCallback<Long?> {
+                override fun handleResponse(response: Long?) {
+                    // Contact has been deleted. The response is the
+                    Log.d("LoginActivity","handleResponse: $response")
+                    // time in milliseconds when the object was deleted
+                }
+
+                override fun handleFault(fault: BackendlessFault) {
+                    // an error has occurred, the error code can be
+                    Log.d("LoginActivity","handleFault: ${fault.message}")
+                    // retrieved with fault.getCode()
+                }
+            })
+        // in the handleResponse, we'll need to also delete the item from the loanList
+        // and make sure that the recyclerview is updated
+    }
+    private fun retrieveAllData(){
+        // val whereClause = "ownerId = '${AppConstants.ownerId}'"
+        val whereClause = "defaultSettings = 'True'"
+        val queryBuilder = DataQueryBuilder.create()
+        queryBuilder.whereClause = whereClause
+        Backendless.Data.of(Call::class.java).find(queryBuilder,object :
+            AsyncCallback<List<Call?>?> {
+            override fun handleResponse(foundLoan: List<Call?>?) {
+                // all Contact instances have been found
+                Log.d(CallActivity.TAG,"foundDefaultCall: $foundLoan")
+                val wong = ArrayList<Call>()
+                if (!foundLoan.isNullOrEmpty()) {
+                    val callList = foundLoan as List<*>
+                    callList.forEach { Call -> wong.add(Call as Call) }
+                    callData = callList.first() as Call
+                    val detailIntent= Intent(this@Home.context,CallAcceptScreen::class.java).apply{
+                        putExtra(CallAcceptScreen.EXTRA_SCHEDULEDCALL, callData)
+                    }
+                    startActivity(detailIntent)
+                }
+            }
+
+
+            override fun handleFault(fault: BackendlessFault) {
+                // an error has occurred, the error code can be retrieved with fault.getCode()
+                Log.d(CallActivity.TAG,"handleFault: ${fault.message}")
+            }
+        })
     }
 }

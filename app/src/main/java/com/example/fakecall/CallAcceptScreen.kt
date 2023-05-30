@@ -7,10 +7,20 @@ import com.example.fakecall.databinding.ActivityCallAcceptScreenBinding
 
 class CallAcceptScreen : AppCompatActivity() {
     private lateinit var binding: ActivityCallAcceptScreenBinding
+    private var callData = Call()
+    companion object{
+        val EXTRA_SCHEDULEDCALL = "I hope you trip on a rock Alan"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityCallAcceptScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(intent.getParcelableExtra<Call>(EXTRA_SCHEDULEDCALL) == null) {
+            callData = Call()
+        } else {
+            callData = intent.getParcelableExtra<Call>(EXTRA_SCHEDULEDCALL) ?: Call()
+        }
 
 
         binding.floatingActionButtonCallScreenAccept.setOnClickListener{
