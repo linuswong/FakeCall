@@ -3,62 +3,55 @@ package com.example.fakecall
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.media.RingtoneManager
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
-import android.transition.TransitionInflater
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.backendless.Backendless
 import com.backendless.async.callback.AsyncCallback
 import com.backendless.exceptions.BackendlessFault
 import com.backendless.persistence.DataQueryBuilder
-import com.example.fakecall.databinding.FragmentSettingsBinding
+import com.example.fakecall.databinding.ActivityCallDetailBinding
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import java.util.*
-import kotlin.collections.ArrayList
 
-private var m_Text = ""
-private var callData = Call()
+//duplicate of settings
+class CallDetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCallDetailBinding
+    private var m_Text = ""
+    private var callData = Call()
 
-class Settings : Fragment() {
-    // TODO: Rename and change types of parameters
-    private lateinit var binding : FragmentSettingsBinding
+
+    companion object {
+        val EXTRA_CALL = "WHY DID U NOT DO THIS AHHHHHH"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val inflater = TransitionInflater.from(requireContext())
-        exitTransition = inflater.inflateTransition(R.transition.slide_right)
-        retrieveAllData() // retrieves backendless data and also initalizes the stuff
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSettingsBinding.inflate(inflater,container,false)
+        binding = ActivityCallDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        if(intent.getParcelableExtra<Call>(EXTRA_CALL) == null) {
+            callData = Call()
+        } else {
+            callData = intent.getParcelableExtra<Call>(EXTRA_CALL) ?: Call()
+        }
+        initializeButtonsAndStuff()
         saveSettings()
         showCallerNameOptions()
         showCallTimeOptions()
         showRingToneOptions()
         showCallerAudioOptions()
-        retrieveAllData()
-        return binding.root
     }
 
-
-
-    //popup for filling in caller name
     private fun showCallerNameOptions(){
         binding.buttonSettingsSetCallerName.setOnClickListener {
-            val builder = AlertDialog.Builder(this.context)
+            val builder = AlertDialog.Builder(this)
             builder.setTitle("Set Caller Name")
-            val input = EditText(this.context)
+            val input = EditText(this)
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
             builder.setPositiveButton(
@@ -83,7 +76,7 @@ class Settings : Fragment() {
         val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
         val minute = mcurrentTime.get(Calendar.MINUTE)
 
-        mTimePicker = TimePickerDialog(this.context, object : TimePickerDialog.OnTimeSetListener {
+        mTimePicker = TimePickerDialog(this, object : TimePickerDialog.OnTimeSetListener {
             override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                 binding.textViewSettingsCallTime.setText(String.format("%d : %d", hourOfDay, minute))
                 mcurrentTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -93,7 +86,7 @@ class Settings : Fragment() {
             }
         }, hour, minute, false)
         binding.buttonSettingsSetCallTime.setOnClickListener {
-          mTimePicker.show()
+            mTimePicker.show()
         }
     }
     //crashes if ringtone is not picked
@@ -134,7 +127,7 @@ class Settings : Fragment() {
 
                     }
                 }
-            ).show(this.parentFragmentManager, null)
+            ).show(this.supportFragmentManager, null)
 
 
         }
@@ -144,12 +137,12 @@ class Settings : Fragment() {
         binding.buttonSettingsCallerVoice.setOnClickListener {
             val colors = arrayOf("red", "green", "blue", "black")
 
-            val builder = AlertDialog.Builder(this.context)
+            val builder = AlertDialog.Builder(this)
             builder.setTitle("Pick a color")
             builder.setItems(colors) { dialog, which ->
                 // the user clicked on colors[which]
             }
-            val input = EditText(this.context)
+            val input = EditText(this)
             input.inputType = InputType.TYPE_CLASS_TEXT
             builder.setView(input)
             builder.setPositiveButton(
@@ -164,9 +157,6 @@ class Settings : Fragment() {
         }
     }
 
-
-
-    //initializes buttons when data is retrieved
     private fun initializeButtonsAndStuff(){
         binding.textViewSettingsCallerName.text = callData.caller
         binding.textViewSettingsCallTime.text = callData.callTimeText
@@ -176,17 +166,16 @@ class Settings : Fragment() {
 
     //saves the current settings as the default to backendless
     private fun saveSettings(){
-        callData.defaultSettings = "True"
+        callData.defaultSettings = "False"
         binding.buttonSettingsSaveDefault.setOnClickListener {
             callData.caller = binding.textViewSettingsCallerName.text.toString()
-            println(callData)
             //pasted code from login and registration
             fun updateCall() {
                 Backendless.Data.of(Call::class.java).save(callData, object : AsyncCallback<Call> {
                     override fun handleResponse(response: Call?) {
                         // Contact instance has been updated
                         Log.d("SAVE SETTINGS","handle response: $response")
-                        Toast.makeText(this@Settings.context, "Settings successfully saved", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CallDetailActivity, "Settings successfully saved", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun handleFault(fault: BackendlessFault) {
@@ -198,68 +187,4 @@ class Settings : Fragment() {
             updateCall()
         }
     }
-    //retrieves default call data from backendless
-    private fun retrieveAllData(){
-        // val whereClause = "ownerId = '${AppConstants.ownerId}'"
-        val whereClause = "defaultSettings = 'True'"
-        val queryBuilder = DataQueryBuilder.create()
-        queryBuilder.whereClause = whereClause
-        Backendless.Data.of(Call::class.java).find(queryBuilder,object :
-            AsyncCallback<List<Call?>?> {
-            override fun handleResponse(foundLoan: List<Call?>?) {
-                // all Contact instances have been found
-                Log.d(CallActivity.TAG,"foundDefaultCall: $foundLoan")
-                val wong = ArrayList<Call>()
-                if (!foundLoan.isNullOrEmpty()) {
-                    val callList = foundLoan as List<*>
-                    callList.forEach { Call -> wong.add(Call as Call) }
-                    callData = callList.first() as Call
-                    initializeButtonsAndStuff()
-                }
-            }
-
-
-            override fun handleFault(fault: BackendlessFault) {
-                // an error has occurred, the error code can be retrieved with fault.getCode()
-                Log.d(CallActivity.TAG,"handleFault: ${fault.message}")
-            }
-        })
-    }
-
-
-//    override fun onResume() {
-//        setFragmentListener()
-//        super.onResume()
-//    }
-//
-//    override fun onStop() {
-//       newInstance(callerName?:"Caller Name Not Set", param2?:"e")
-//        Log.d("Frogs","STOPPED + $callerName")
-//        super.onStop()
-//    }
-//    private fun setFragmentListener(){
-//        setFragmentResultListener(AppConstants.REQUEST_KEY) { requestKey, bundle ->
-////            // We use a String here, but any type that can be put in a Bundle is supported.
-////            System.out.println("LINUS FROGS WORKED 1/2")
-//            if(bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY) != null)
-//            {
-//                callData = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)!!
-//                System.out.println("LINUS FROGS 2/2")
-//                initializeButtonsAndStuff()
-//            }
-//        }
-//    }
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        viewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
-//        viewModel.bundleFromFragmentBToFragmentA.observe(viewLifecycleOwner, Observer {
-//            // This will execute when fragment B set data for `bundleFromFragmentBToFragmentA`
-//            // TODO: Write your logic here to handle data sent from FragmentB
-//            val message = it.getString("ARGUMENT_MESSAGE", "")
-//            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
-//        })
-//    }
-
-
 }

@@ -9,13 +9,12 @@ import java.util.*
 data class Call(
     var caller: String = "Caller name not set",
     var callTimeText: String = "Call-time not set",
+    var ringtone: String= "",
     var ringtoneText: String = "Ringtone not set",
     var callerAudioText: String = "Caller Audio not set",
     var callTime: Date = Date(0),
-    var isActive: Boolean = false,
-    var isDefault: Boolean = true,
+    //made string because backendless is weird
+    var defaultSettings: String = "False",
     var objectId: String? = null,
     var ownerId: String?= null,
-    var ringtone: String?= null,
-    val area: String= ""
 ) : Parcelable

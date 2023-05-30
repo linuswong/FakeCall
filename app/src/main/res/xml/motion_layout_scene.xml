@@ -8,12 +8,9 @@
         app:constraintSetStart="@+id/start"
         motion:duration="1000"
         app:autoTransition="animateToEnd">
-        <OnSwipe
-            app:dragDirection="dragDown"
-            app:touchAnchorSide="top" />
     </Transition>
 
-//start
+    //start
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
@@ -61,6 +58,15 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline_FragmentScheduling_guideline"
             android:layout_marginEnd="32dp"
             android:visibility="visible" />
+        <Constraint
+            android:id="@+id/textView_FragmentScheduling_noSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
     </ConstraintSet>
 
 

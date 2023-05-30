@@ -19,8 +19,6 @@ class CallActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     companion object{
-        val EXTRA_USERNAME = "username"
-        val EXTRA_PASSWORD = "password"
         val TAG = "CallActivity"
     }
 
@@ -53,17 +51,17 @@ class CallActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.notification -> replaceFragment(Profile())
+                R.id.notification -> replaceFragment(Scheduling())
                 R.id.settings -> replaceFragment(Settings())
                 else -> super.onOptionsItemSelected(it)
             }
             true
         }
-        supportFragmentManager.setFragmentResultListener(AppConstants.REQUEST_KEY, this) { requestKey, bundle ->
-            val result = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)
-            System.out.println("This is the result $result")
-            // Do something with the result.
-        }
+//        supportFragmentManager.setFragmentResultListener(AppConstants.REQUEST_KEY, this) { requestKey, bundle ->
+//            val result = bundle.getParcelable<Call>(AppConstants.BUNDLE_KEY)
+//            System.out.println("This is the result $result")
+//            // Do something with the result.
+//        }
     }
 
     private fun replaceFragment(fragment : Fragment){

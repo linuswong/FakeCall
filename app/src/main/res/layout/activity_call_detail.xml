@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CallDetailActivity">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_picture_callDetail_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageView.Circle"
+        app:srcCompat="@drawable/profile_picture" />
+
+    <ImageView
+        android:id="@+id/edit_profile_picture_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-32dp"
+        android:layout_weight="5"
+        android:background="@drawable/bg_circle"
+        android:padding="8dp"
+        android:src="@drawable/ic_edit_24"
+        app:layout_constraintStart_toEndOf="@+id/profile_picture_callDetail_picture"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_callDetail_picture"
+        app:tint="@color/white" />
+
+    <Button
+        android:id="@+id/button_settings_setCallerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:text="Set Caller Name"
+        app:layout_constraintBottom_toTopOf="@+id/textView_settings_callerName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_callDetail_picture"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView_settings_callerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Caller Name Not Set"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings_setCallTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_setCallerName"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button_settings_setCallTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Set Call Time"
+        app:layout_constraintBottom_toTopOf="@+id/textView_settings_callTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_settings_callerName"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView_settings_callTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Time Not Set"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings_setRingtone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_setCallTime"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button_settings_setRingtone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="set ringtone"
+        app:layout_constraintBottom_toTopOf="@+id/textView_settings_ringtone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_settings_callTime"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView_settings_ringtone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ringtone not set"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings_callerVoice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_setRingtone"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button_settings_callerVoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Set Caller Audio"
+        app:layout_constraintBottom_toTopOf="@+id/textView_settings_callerAudioText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_settings_ringtone"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView_settings_callerAudioText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Caller Audio not set"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings_saveDefault"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_callerVoice"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button_settings_saveDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="48dp"
+        android:text="Save as default"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_settings_callerAudioText"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
