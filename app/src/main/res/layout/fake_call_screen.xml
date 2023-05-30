@@ -209,7 +209,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton_keypad_fakeCallScreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
