@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ImageView.Circle"
-                app:srcCompat="@drawable/profile_picture" />
+                app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
             <ImageView
                 android:id="@+id/edit_profile_picture_button"
