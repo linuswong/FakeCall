@@ -22,10 +22,16 @@ class FakeCallScreen:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FakeCallScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //player = MediaPlayer.create(this, R.raw.animal_crossing)
+                                                //call audio chosen by profile
+        player = MediaPlayer.create(this, R.raw.animal_crossing)
+        player.start()
+        player.isLooping = true
         binding.textView7.text="balls"
 
         binding.floatingActionButtonHangUp.setOnClickListener {
+            player.isLooping=false
+            player.stop()
+
             val detailIntent = Intent(it.context, CallActivity::class.java)
             startActivity(detailIntent)
         }

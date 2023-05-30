@@ -36,6 +36,8 @@ class Home : Fragment() {
         //Big Green Button
         binding.floatingActionButtonHomeStartCall.setOnClickListener {
             retrieveAllData()
+            val detailIntent= Intent(it.context,CallAcceptScreen::class.java)
+            startActivity(detailIntent)
         }
         retrieveAllDataScheduled()
         return binding.root
